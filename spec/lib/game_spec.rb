@@ -92,4 +92,12 @@ describe Game do
       expect(subject.score).to eq 127
     end
   end
+
+  context 'when rolling a normal game' do
+    it 'scores to 133' do
+      [1, 4, 4, 5, 6, 4, 5, 5, 10, 0, 1, 7, 3, 6, 4, 10, 2, 8, 6].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 133
+    end
+  end
 end
