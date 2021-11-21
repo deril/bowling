@@ -63,7 +63,6 @@ class Frame
   end
 
   def validate_pins(pins)
-    raise InvalidRoll, 'Cannot roll more than 10 pins' if pins > 10
     raise InvalidRoll, 'Cannot roll less than 0 pins' if pins.negative?
     raise InvalidRoll, 'Cannot roll more than 10 pins' if !complete? && pins + first_roll > 10
   end
