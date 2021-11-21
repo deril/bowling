@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
-require 'rspec'
+require 'spec_helper'
 
-describe 'Game' do
-  before do
-    # Do nothing
-  end
+describe Game do
+  subject { Game.new }
 
-  after do
-    # Do nothing
-  end
+  context 'when rolling 1,3,6,3' do
+    it 'scores to 13' do
+      [1, 3, 6, 3].each { |pins| subject.roll(pins) }
 
-  context 'when condition' do
-    it 'succeeds' do
-      pending 'Not implemented'
+      expect(subject.score).to eq 13
     end
   end
 end
