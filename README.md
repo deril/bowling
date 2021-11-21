@@ -1,7 +1,7 @@
 # Bowling game score calculator
 
 ## Description
-In this project, we will be creating a simple calculator that can be used to calculate the score of a bowling game.
+In this project, we created a simple bowling game score calculator.
 
 ## Usage
 1. run the `bin/bowling` command with the following arguments:
