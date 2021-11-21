@@ -2,44 +2,31 @@
 
 class Game
   def initialize
-    @rolls = []
+    @frames = [Frame.new]
   end
 
   def roll(pins)
-    @rolls << pins
+    active_frames.each do |frame|
+      frame.hit_pins(pins)
+    end
+    add_frame
   end
 
   def score
-    score = 0
-    frame_index = 0
-    while frame_index < @rolls.size
-      if strike?(frame_index)
-        score += 10 + strike_bonus(frame_index)
-        frame_index += 1
-      elsif spare?(frame_index)
-        score += 10 + spare_bonus(frame_index)
-        frame_index += 2
-      else
-        score += sum_of_balls_in_frame(frame_index)
-        frame_index += 2
-      end
-    end
-    score
+    frames.map(&:score).reduce(:+)
   end
 
-  def strike?(frame_index)
-    @rolls[frame_index] == 10
+  private
+
+  def add_frame
+    return if frames.size == 10
+
+    frames << Frame.new if frames.last&.complete?
   end
 
-  def strike_bonus(frame_index)
-    @rolls[frame_index + 1] + @rolls[frame_index + 2]
-  end
+  attr_reader :frames
 
-  def spare?(frame_index)
-    @rolls[frame_index] + @rolls[frame_index + 1] == 10
-  end
-
-  def sum_of_balls_in_frame(frame_index)
-    @rolls[frame_index] + @rolls[frame_index + 1]
+  def active_frames
+    frames.select(&:active?)
   end
 end

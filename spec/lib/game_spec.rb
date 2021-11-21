@@ -12,4 +12,84 @@ describe Game do
       expect(subject.score).to eq 13
     end
   end
+
+  context 'when rolling 10,10,10' do
+    it 'scores to 60' do
+      [10, 10, 10].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 60
+    end
+  end
+
+  context 'when rolling 10,4,0' do
+    it 'scores to 14' do
+      [10, 4, 0].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 18
+    end
+  end
+
+  context 'when rolling a spare' do
+    it 'scores to 16' do
+      [5, 5, 3].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 16
+    end
+  end
+
+  context 'when rolling a strike' do
+    it 'scores to 24' do
+      [10, 3, 4].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 24
+    end
+  end
+
+  context 'when rolling a perfect game' do
+    it 'scores to 300' do
+      [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 300
+    end
+  end
+
+  context 'when rolling a strike and a spare' do
+    it 'scores to 36' do
+      [10, 5, 5, 3].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 36
+    end
+  end
+
+  context 'when rolling a strike and a spare and a strike' do
+    it 'scores to 46' do
+      [10, 5, 5, 3, 0, 10].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 46
+    end
+  end
+
+  context 'when rolling a strike and a spare and a strike and a spare' do
+    it 'scores to 82' do
+      [10, 5, 5, 3, 0, 10, 5, 5, 3, 0, 10].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 82
+    end
+  end
+
+  context 'when rolling a strike and a spare and a strike and a spare and a strike' do
+    it 'scores to 102' do
+      [10, 5, 5, 3, 0, 10, 5, 5, 3, 0, 10, 10].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 102
+    end
+  end
+
+  context 'when rolling a strike and a spare and a strike and a spare and a strike and a spare' do
+    it 'scores to 127' do
+      [10, 5, 5, 3, 0, 10, 5, 5, 3, 0, 10, 10, 5, 5].each { |pins| subject.roll(pins) }
+
+      expect(subject.score).to eq 127
+    end
+  end
 end
